@@ -1,4 +1,6 @@
 # cara export feature capcut pro
+- [https://www.youtube.com/watch?v=sVd3Gx5uJxQ](https://www.youtube.com/watch?v=sVd3Gx5uJxQ)
+
 ## 1. lakukan ctrl + A, jika sudah lakukan click compount clip (subject project)
 ![alt text](images/README/image.png)
 

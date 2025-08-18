@@ -1,0 +1,170 @@
+0️⃣1️⃣ – Membuat VM Otomatis dengan Vagrant
+
+📌 Steps:
+1️⃣ Install VirtualBox / VMware dan Vagrant
+2️⃣ Cari box/image VM di Vagrant Cloud
+3️⃣ Jalankan vagrant init dan atur Vagrantfile sesuai kebutuhan
+4️⃣ Jalankan vagrant up untuk membuat & menjalankan VM
+
+💻 Command:
+vagrant init <user>/<box>
+vagrant up
+vagrant halt
+vagrant destroy
+
+🔗 Cek di sini:
+https://developer.hashicorp.com/vagrant
+https://portal.cloud.hashicorp.com/vagrant/discover
+
+#vagrant #code #tkj #ti #coding #program #vbox #virtualbox #vm #network
+
+---
+
+0️⃣2️⃣ – Deploy Website Statis Menggunakan GitHub Pages
+
+📌 Steps:
+1️⃣ Upload project ke repository
+2️⃣ Aktifkan GitHub Pages di Settings
+3️⃣ Website langsung bisa diakses! 🌍
+
+💻 Command:
+git config --global user.email "you@example.com"
+git config --global user.email "Your Name"
+
+git init
+git add .
+git commit -m <message>
+git branch -M <nama_branch>
+git remote add <nama_remote> https://<user>:<token>@github.com/user/repository
+git push -u <nama_remote> <nama_branch>
+
+🔗 Cek di sini:
+- https://github.com
+
+#GitHubPages #WebDevelopment #CodingForBeginners #PortfolioWebsite #BelajarCoding #GratisHosting
+
+---
+
+0️⃣3️⃣ – Mengelola Perubahan & Riwayat Git
+
+📌 Steps:
+1️⃣ Git stash – Simpan perubahan sementara tanpa commit.
+2️⃣ Git reset – Hilangkan commit dari riwayat (ubah history).
+3️⃣ Git revert – Buat commit baru untuk membatalkan commit lama.
+4️⃣ Git reflog – Lihat semua riwayat pergerakan HEAD (time machine Git).
+
+💻 Command:
+
+Stash perubahan sementara
+
+git stash
+git stash save "pesan"
+git stash list
+git stash apply <id>
+git stash pop <id>
+git stash drop <id>
+git stash clear
+
+Reset commit:
+git reset --soft <hash_commit>
+git reset --mixed <hash_commit>
+git reset --hard <hash_commit>
+
+Revert commit:
+git revert <hash_commit>
+git revert <hash1> <hash2>
+git revert --abort
+
+Reflog (time machine Git):
+git reflog
+git checkout <hash_dari_reflog>
+git reset --hard <hash_dari_reflog>
+
+📎 Tips:
+- Gunakan git stash saat mau switch branch tapi ada kerjaan setengah jalan.
+- Git reset sebaiknya hanya dipakai di branch lokal (ubah history).
+- Git revert aman karena commit lama tetap tersimpan.
+- Kalau commit “hilang”, coba cari di git reflog untuk restore.
+
+#Git #GitStash #GitReset #GitRevert #GitReflog #VersionControl #Coding
+
+---
+
+0️⃣4️⃣ – Menggabungkan Branch pada Project Git
+
+📌 Steps:
+1️⃣ Git merge – Menggabungkan perubahan dari branch lain ke branch aktif.
+2️⃣ Git rebase – Memindahkan urutan commit agar riwayat lebih rapi.
+3️⃣ Git cherry-pick – Mengambil commit tertentu dari branch lain tanpa merge seluruh branch.
+
+💻 Command:
+# Pindah ke branch tujuan
+git checkout <branch_tujuan>
+
+# Merge branch lain ke branch aktif
+git merge <branch_sumber>
+git merge --abort       # Batalkan merge
+git merge --continue    # Lanjutkan merge setelah konflik
+
+# Rebase branch aktif ke branch lain
+git rebase -i <branch_sumber>
+git rebase --abort      # Batalkan rebase
+git rebase --skip       # Lewati commit saat rebase
+git rebase --continue   # Lanjutkan rebase setelah konflik
+
+# Ambil commit spesifik dari branch lain
+git cherry-pick <hash_commit>
+git cherry-pick --abort     # Batalkan cherry-pick
+git cherry-pick --skip      # Lewati commit saat cherry-pick
+git cherry-pick --continue  # Lanjutkan cherry-pick setelah konflik
+
+📎 Tips:
+- Gunakan git log --oneline --graph --all untuk melihat struktur commit sebelum merge/rebase.
+- Lakukan git pull --rebase jika ingin update branch dengan riwayat yang lebih bersih.
+
+#Git #GitMerge #GitRebase #GitCherryPick #VersionControl #Coding
+
+---
+
+0️⃣5️⃣ – Sinkronisasi dengan Remote (Git Origin)
+
+📌 Steps:
+1️⃣ Git remote – Mengecek / menambahkan remote repository.
+2️⃣ Git fetch – Mengambil update dari remote tanpa menggabungkannya.
+3️⃣ Git pull – Mengambil sekaligus menggabungkan perubahan dari remote.
+4️⃣ Git push – Mengirim perubahan lokal ke remote.
+
+💻 Command:
+# Lihat daftar remote
+git remote -v
+
+# Tambah remote baru (kalau belum ada)
+git remote add origin <url_repo>
+
+# Ambil update dari remote (tidak otomatis merge)
+git fetch origin
+git fetch --all      # Ambil semua remote
+
+# Update branch aktif dengan remote (otomatis merge/rebase)
+git pull origin <branch>	    # menggunakan merge
+git pull --rebase origin <branch>   # Riwayat lebih rapi
+
+# Kirim branch lokal ke remote
+git push origin <branch>
+
+# Kirim semua tag sekaligus
+git push origin --tags
+
+# Jika branch baru, gunakan -u supaya tracking otomatis
+git push -u origin <branch>
+
+📎 Tips:
+git fetch aman untuk ngecek update tanpa ganggu branch lokal.
+git pull = git fetch + git merge (atau --rebase untuk riwayat rapi).
+git push -u cukup sekali, setelah itu cukup git push.
+
+Bandingkan lokal vs remote:
+git log origin/<branch>..<branch>
+git status
+
+#Git #GitRemote #GitPush #GitPull #GitFetch #VersionControl #Coding
