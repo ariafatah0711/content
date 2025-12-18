@@ -52,3 +52,5 @@ Tidak ada pilihan ganda — murni praktik, eksploitasi nyata, serta laporan POC 
 * ExtraSID / SID History
 * Parent–Child trust abuse
 * Enterprise Admin takeover
+
+- https://drive.google.com/drive/folders/1vbOlVK8S1k_Ai8EgyjdJCRC4rXq5CFp9
