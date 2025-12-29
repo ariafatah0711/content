@@ -40,3 +40,24 @@ Misalnya, jika seorang pengguna memiliki izin untuk menjalankan editor teks (sep
     ![alt text](images/4_privesc_sudo/image-1.png)
 4. Sekarang penyerang memiliki akses shell dengan hak akses root.
    ![alt text](images/4_privesc_sudo/image-3.png)
+
+---
+
+Privilege Escalation via SUDO adalah teknik menaikkan hak akses di Linux dengan memanfaatkan konfigurasi sudoers yang kurang tepat. Jika sebuah user diberi izin menjalankan perintah tertentu sebagai root, celah ini bisa dimanfaatkan untuk mendapatkan akses penuh ke sistem.
+
+Biasanya prosesnya dimulai dengan mengecek izin SUDO menggunakan sudo -l. Dari sini bisa terlihat command apa saja yang boleh dijalankan. Beberapa binary seperti vim berbahaya jika diberikan akses SUDO tanpa pembatasan, karena dapat digunakan untuk membuka shell root.
+
+Kesalahan kecil seperti penggunaan NOPASSWD pada binary tertentu sudah cukup untuk membuat user biasa berubah menjadi root, tanpa perlu exploit kernel atau teknik kompleks.
+
+Materi ini menjadi bagian penting dalam pembahasan Linux Privilege Escalation, terutama untuk memahami bagaimana konfigurasi yang terlihat “normal” justru bisa menjadi celah serius.
+
+🔗 Linuxenic Corp
+https://linuxenic.com
+
+🎓 CPES – Certified Privilege Escalation Specialist
+https://linuxenic.com/cpes
+
+@linuxenicorp @linuxenic
+
+#CPES #Linuxenic #PrivilegeEscalation #SUDO
+#LinuxSecurity #CyberSecurity #EthicalHacking #Linux
