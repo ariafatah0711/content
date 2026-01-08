@@ -1,13 +1,14 @@
 ## setup
 ```bash
 docker build -t cron-abuse .
-docker run -it --rm cron-abuse
+docker run -it --rm --name cron-abuse cron-abuse
 ```
 
 ## privesc
 ```bash
 docker ps
-docker exec -it <CONTAINER_ID> /bin/bash
+docker exec -it cron-abuse /bin/bash -c "su user1"
+bash
 
 su user1
 crontab -l

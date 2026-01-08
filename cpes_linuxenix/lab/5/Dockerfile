@@ -16,9 +16,10 @@ COPY app/backup.py /opt/app/backup.py
 
 # Permission TIDAK AMAN (kerentanan)
 RUN chown -R root:dev /opt/app && chmod -R 775 /opt/app
+RUN chown -R root:root /opt/app/backup.py
 
 # Copy crontab
 COPY crontab /etc/crontab
 
 # Start cron
-CMD cron && tail -f /var/log/syslog
+CMD cron -f

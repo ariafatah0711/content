@@ -1,0 +1,98 @@
+Vagrant.configure("2") do |config|
+  # =======================
+  # PIVOT SERVER
+  # =======================
+  config.vm.define "pivot" do |pivot|
+    pivot.vm.box = "ubuntu/jammy64"
+    pivot.vm.hostname = "pivot"
+
+    # 1️⃣ Host-only (akses attacker)
+    pivot.vm.network "private_network",
+        ip: "192.168.56.10"
+
+    # 2️⃣ Internal network (pivoting)
+    pivot.vm.network "private_network",
+        virtualbox__intnet: "intnet",
+        ip: "10.10.10.10"
+
+    # pivot.ssh.username = 'ubuntu'
+    # pivot.ssh.password = 'root'
+    pivot.ssh.insert_key = false
+    pivot.ssh.keys_only = false
+
+    pivot.vm.provider "virtualbox" do |vb|
+      vb.name = "pivot-host"
+      vb.memory = 768
+      vb.cpus = 1
+    end
+
+    pivot.vm.provision "shell", inline: <<-SHELL
+      # apt update
+      # apt install -y openssh-server net-tools
+
+      # Aktifkan password login
+      sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?KbdInteractiveAuthentication .*/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?UsePAM .*/UsePAM yes/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+      # DISABLE cloud-init ssh override
+      sudo rm -f /etc/ssh/sshd_config.d/50-cloud-init.conf
+
+      sudo systemctl restart sshd.service
+
+      # Set password user ubuntu (user sudah ada)
+      echo "ubuntu:root" | chpasswd
+      usermod -aG sudo ubuntu
+
+      echo "[+] Pivot server ready"
+    SHELL
+  end
+
+  # =======================
+  # INTERNAL TARGET
+  # =======================
+  config.vm.define "internal" do |internal|
+    internal.vm.box = "ubuntu/jammy64"
+    internal.vm.hostname = "internal"
+
+    # 2️⃣ INTERNAL ONLY (no NAT)
+    internal.vm.network "private_network",
+        virtualbox__intnet: "intnet",
+        ip: "10.10.10.20"
+
+    # internal.ssh.username = 'ubuntu'
+    # internal.ssh.password = 'root'
+    internal.ssh.insert_key = false
+    internal.ssh.keys_only = false
+
+    internal.vm.provider "virtualbox" do |vb|
+      vb.name = "internal-host"
+      vb.memory = 512
+      vb.cpus = 1
+    end
+
+    internal.vm.provision "shell", inline: <<-SHELL
+      # apt update
+      # apt install -y openssh-server net-tools
+
+      # Aktifkan password login
+      sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?KbdInteractiveAuthentication .*/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?UsePAM .*/UsePAM yes/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+      # DISABLE cloud-init ssh override
+      sudo rm -f /etc/ssh/sshd_config.d/50-cloud-init.conf
+
+      sudo systemctl restart sshd.service
+
+      # Set password user ubuntu (user sudah ada)
+      echo "ubuntu:root" | chpasswd
+      usermod -aG sudo ubuntu
+
+      echo "[+] Pivot server ready"
+    SHELL
+  end
+
+end
